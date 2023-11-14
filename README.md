@@ -1,4 +1,4 @@
-# IZTECH_CENG211_HW1
+# IZTECH_CENG211_HW2
 IYTE Programlama Temelleri HW2
 
 This is an example of the second homework of Programming Fundamentals course of Computer Engineering in IZTECH.
