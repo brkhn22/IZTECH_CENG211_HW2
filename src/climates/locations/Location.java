@@ -76,11 +76,12 @@ public class Location {
 		return temperatureArrayList;
 	}
 	
-	public ArrayList<WindSpeed> getWindSpeedOfYear(int yearOffSet){
+	public ArrayList<WindSpeed> getWindSpeedOfMonth(String monthText){
 		// Method that returns wind speed array list between (yearOffSet, yearOffSet + 12)
-		ArrayList<WindSpeed> windSpeedArrayList = new ArrayList<>(windSpeedMeasurementArrayList.size()/3);
-
-		for(int i = yearOffSet*12; i<(yearOffSet+1)*12; i++) {
+		ArrayList<WindSpeed> windSpeedArrayList = new ArrayList<>(NUMBER_OF_MONTHS/12);
+		int monthIndex = getNumberOfMonth(monthText)-1;
+		
+		for(int i = monthIndex; i<NUMBER_OF_MONTHS; i += 12) {
 			WindSpeed newWindSpeed = this.windSpeedMeasurementArrayList.get(i);
 			windSpeedArrayList.add(newWindSpeed);
 		}
@@ -97,7 +98,7 @@ public class Location {
 		return humidityArrayList;
 	}
 	
-	public ArrayList<RadiationAbsorbtion> getRadiationAbsorbtionOfCity(int yearOffSet){
+	public ArrayList<RadiationAbsorbtion> getRadiationAbsorbtionOfYear(int yearOffSet){
 		// Method that returns radiaton absorbtion array list between (yearOffSet, yearOffSet + 12)
 		ArrayList<RadiationAbsorbtion> radiationAbsorbtionArrayList = new ArrayList<>(radiationAbsorbtionMeasurementArrayList.size()/3);
 

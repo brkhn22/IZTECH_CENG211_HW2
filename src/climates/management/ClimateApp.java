@@ -16,7 +16,7 @@ public class ClimateApp {
 			"[3] Calculate average wind speed for a city according to speed unit and year",
 			"[4] Calculate average humidity of a city for every year.",
 			"[5] Count how many times a year a specific radiation intensity value appears.",
-			"[6] Calculate the “felt temperature” value for a specific month.",
+			"[6] Calculate the \"felt temperature\" value for a specific month.",
 			"[7] Exit the application"
 			};
 	
@@ -30,6 +30,7 @@ public class ClimateApp {
 	}
 	
 	public void startClimateApp() {
+		// App that creates menu, asks input from an user.
 		boolean keepGoing = true;
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
@@ -132,17 +133,17 @@ public class ClimateApp {
 						System.out.println();
 					}
 					
-					System.out.println("[1] 2020 [2] 2021 [3] 2022");
-					System.out.print("Please select the year: ");
-					int selectedYear = scanner.nextInt();
+					System.out.println("[1] January [2] February [3] March [4] April [5] May [6] June\n[7] July [8] August [9] September [10] October [11] November [12] December");
+					System.out.print("Please select the month unit: ");
+					int selectedMonth = scanner.nextInt();
 					
 					System.out.println();
-					while(!isSelectionValid(selectedYear, 1, 3)){
+					while(!isSelectionValid(selectedMonth, 1, 12)){
 						System.out.print("Incorrect year input! Please reenter another year input: ");
-						selectedYear = scanner.nextInt();
+						selectedMonth = scanner.nextInt();
 						System.out.println();
 					}
-					calculateAverageWindSpeedOfCity(yearArray[selectedYear-1], cityName, windSpeedUnitArray[selectedUnit-1]);
+					calculateAverageWindSpeedOfCity(Location.MONTH_ARRAY[selectedMonth-1], cityName, windSpeedUnitArray[selectedUnit-1]);
 					break;
 				}
 				case 4:{
@@ -232,7 +233,7 @@ public class ClimateApp {
 				case 7:{
 					keepGoing = false;
 					System.out.println();
-					System.out.println("==> Closing the application…");
+					System.out.println("==> Closing the applicationï¿½");
 					System.exit(0);
 					break;
 				}
@@ -263,6 +264,7 @@ public class ClimateApp {
 					temperatureSum += temperature.getKelvinMeasurement();
 			}
 			double average = temperatureSum/temperatureArrayList.size();
+			// Makes country name's first letter upper case, rest of it lower case.
 			countryName = (""+countryName.charAt(0)).toUpperCase() + countryName.substring(1, countryName.length()).toLowerCase();
 
 			System.out.printf("==> Average temperature of %s in %s in %s : %.2f\n", countryName, year, unit, average);
@@ -288,8 +290,8 @@ public class ClimateApp {
 		System.out.println();
 	}
 
-	private void calculateAverageWindSpeedOfCity(int year, String cityName, String unit) {
-		ArrayList<WindSpeed> windSpeedArrayList = climateRecord.getWindSpeedOfCity(year, cityName);
+	private void calculateAverageWindSpeedOfCity(String monthText, String cityName, String unit) {
+		ArrayList<WindSpeed> windSpeedArrayList = climateRecord.getWindSpeedOfCity(monthText, cityName);
 		double windSpeedSum = 0;
 		if(unit.equals(windSpeedUnitArray[0])) {
 			for (WindSpeed windSpeed : windSpeedArrayList) 
@@ -301,7 +303,7 @@ public class ClimateApp {
 		}
 		double average = windSpeedSum/windSpeedArrayList.size();
 		cityName = (""+cityName.charAt(0)).toUpperCase() + cityName.substring(1, cityName.length()).toLowerCase();
-		System.out.printf("==> Average wind speed of %s in %s in %s : %.2f\n", cityName, year, unit, average);
+		System.out.printf("==> Average wind speed of %s for every years' %s in %s : %.2f\n", cityName, monthText, unit, average);
 		System.out.println();
 	}
 	
@@ -339,6 +341,7 @@ public class ClimateApp {
 	}
 	
 	private boolean isSelectionValid(int selection, int min, int max) {
+		// method that returns if the selection is in the given bounds.
 		if(selection >= min && selection <= max) 
 			return true;
 		

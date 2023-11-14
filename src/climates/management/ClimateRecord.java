@@ -44,10 +44,9 @@ public class ClimateRecord {
 		return city.getTemperatureOfYear(yearOffSet);
 	}
 	
-	public ArrayList<WindSpeed> getWindSpeedOfCity(int year, String cityName){
-		int yearOffSet = year - BASE_YEAR;
+	public ArrayList<WindSpeed> getWindSpeedOfCity(String monthText, String cityName){
 		City city = getCityByName(cityName);
-		return city.getWindSpeedOfYear(yearOffSet);
+		return city.getWindSpeedOfMonth(monthText);
 	}
 	
 	public ArrayList<Humidity> getHumidityOfCity(String cityName){
@@ -58,7 +57,7 @@ public class ClimateRecord {
 	public ArrayList<RadiationAbsorbtion> getRadiationAbsorbtionOfCity(int year, String cityName){
 		int yearOffSet = year - BASE_YEAR;
 		City city = getCityByName(cityName);
-		return city.getRadiationAbsorbtionOfCity(yearOffSet);
+		return city.getRadiationAbsorbtionOfYear(yearOffSet);
 	}
 	
 	public double getFeltTemperature(int year, String monthText, String cityName) {
